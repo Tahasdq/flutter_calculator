@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'calculatorbutton.dart';
+
 void main() {
   runApp(
      const MaterialApp(
@@ -27,32 +29,34 @@ class _CalculatorState extends State<Calculator> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-               Container(
-                 child: SizedBox(
-                   width: 70,
-                   height: 70,
-                   child: TextButton(
-                     onPressed: ()=>{},
-                     style:TextButton.styleFrom(
-                       backgroundColor: Colors.grey,
-                      textStyle: TextStyle(
-                        fontSize: 29,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                    ),
-
-
-                   ) ,
-                     child:const Text('9',style: TextStyle(
-                       color: Colors.white
-                     ),),
-                 )
-               )
-               )
+                CalculateButton(text:9),
+                CalculateButton(text:8),
+                CalculateButton(text:7),
+                CalculateButton(text:'x'),
+              ]), Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CalculateButton(text:6),
+                CalculateButton(text:5),
+                CalculateButton(text:4),
+                CalculateButton(text:'+'),
+              ]), Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CalculateButton(text:3),
+                CalculateButton(text:2),
+                CalculateButton(text:1),
+                CalculateButton(text:'-'),
+              ]), Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CalculateButton(text:'='),
+                CalculateButton(text:"Clr"),
+                CalculateButton(text:"*"),
+                CalculateButton(text:'/'),
               ],
             ),
           ],
