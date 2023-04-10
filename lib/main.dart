@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'calculatorbutton.dart';
 
 void main() {
-  runApp(
-     const MaterialApp(
-          home: Calculator(),
-        debugShowCheckedModeBanner: false,
-      ));
+  runApp(const MaterialApp(
+    home: Calculator(),
+    debugShowCheckedModeBanner: false,
+  ));
 }
+
 class Calculator extends StatefulWidget {
   const Calculator({Key? key}) : super(key: key);
 
@@ -17,9 +17,57 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
-  @override
-  Widget build(BuildContext context) {
-    return  Scaffold(
+  late int firstNum;
+  late int secondNum;
+  late String history;
+  late String textToDisplay;
+  late String res;
+  late String operation;
+
+  void btnOnClick(final btnVal) {
+    if (btnVal == "Clr") {
+      textToDisplay = '';
+      firstNum = 0;
+      secondNum = 0;
+      res = '';
+    } else if (btnVal == "+" || btnVal == "-" || btnVal == "X" || btnVal == "/") {
+      firstNum = int.parse(textToDisplay);
+      res = '';
+      operation = btnVal;
+    } else if (btnVal == "=") {
+      secondNum = int.parse(textToDisplay);
+
+      if (operation == "+") {
+        res = (firstNum + secondNum).toString();
+        history =
+            firstNum.toString() + operation.toString() + secondNum.toString();
+      }
+
+      if (operation == "-") {
+        res = (firstNum - secondNum).toString();
+        history =
+            firstNum.toString() + operation.toString() + secondNum.toString();
+      }
+
+      if (operation == "X") {
+        res = (firstNum * secondNum).toString();
+        history =
+            firstNum.toString() + operation.toString() + secondNum.toString();
+      }
+
+      if (operation == "/") {
+        res = (firstNum / secondNum).toString();
+        history =
+            firstNum.toString() + operation.toString() + secondNum.toString();
+      }
+      else {
+        res = int.parse(textToDisplay + btnVal).toString();
+      }
+
+    }
+  }
+
+    return Scaffold(
       appBar: AppBar(
         title: const Text("Simple Calculator"),
         backgroundColor: Colors.blue,
@@ -28,35 +76,52 @@ class _CalculatorState extends State<Calculator> {
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-             Row(
+          children:  [
+            Container(
+                alignment: Alignment(1.0, -1.0),
+                child: Padding(
+                  padding: EdgeInsets.only(right: 12.0),
+                  child: const Text("4*&*7",
+                      style: TextStyle(
+                        fontSize: 20,
+                      )),
+                )),
+            Container(
+              padding: EdgeInsets.all(12.0),
+              alignment: Alignment(1.0, -1.0),
+              child: const Text("4*&*7",
+                  style: TextStyle(
+                    fontSize: 40,
+                  )),
+            ),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+              CalculateButton(
+                text: 9,
+                callback: btnOnClick,
+              ),
+              CalculateButton(text: 8, callback: btnOnClick),
+              CalculateButton(text: 7, callback: btnOnClick),
+              CalculateButton(text: 'x', callback: btnOnClick),
+            ]),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+              CalculateButton(text: 6, callback: btnOnClick),
+              CalculateButton(text: 5, callback: btnOnClick),
+              CalculateButton(text: 4, callback: btnOnClick),
+              CalculateButton(text: '+', callback: btnOnClick),
+            ]),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+              CalculateButton(text: 3, callback: btnOnClick),
+              CalculateButton(text: 2, callback: btnOnClick),
+              CalculateButton(text: 1, callback: btnOnClick),
+              CalculateButton(text: '-', callback: btnOnClick),
+            ]),
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CalculateButton(text:9),
-                CalculateButton(text:8),
-                CalculateButton(text:7),
-                CalculateButton(text:'x'),
-              ]), Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CalculateButton(text:6),
-                CalculateButton(text:5),
-                CalculateButton(text:4),
-                CalculateButton(text:'+'),
-              ]), Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CalculateButton(text:3),
-                CalculateButton(text:2),
-                CalculateButton(text:1),
-                CalculateButton(text:'-'),
-              ]), Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CalculateButton(text:'='),
-                CalculateButton(text:"Clr"),
-                CalculateButton(text:"*"),
-                CalculateButton(text:'/'),
+                CalculateButton(text: '=', callback: btnOnClick),
+                CalculateButton(text: "Clr", callback: btnOnClick),
+                CalculateButton(text: "*", callback: btnOnClick),
+                CalculateButton(text: '/', callback: btnOnClick),
               ],
             ),
           ],
@@ -65,4 +130,3 @@ class _CalculatorState extends State<Calculator> {
     );
   }
 }
-

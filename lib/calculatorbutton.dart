@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class CalculateButton extends StatelessWidget {
   final text;
+  final Function callback;
   const CalculateButton({Key? key,
+    required this.callback,
     this.text
   }) : super(key: key);
 
@@ -14,7 +16,7 @@ class CalculateButton extends StatelessWidget {
                 width: 70,
                 height: 70,
                 child: TextButton(
-                  onPressed: ()=>{},
+                  onPressed: ()=>callback(text),
                   style:TextButton.styleFrom(
                     backgroundColor: Colors.grey,
                     textStyle: TextStyle(
