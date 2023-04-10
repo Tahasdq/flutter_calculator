@@ -17,16 +17,17 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
-  late int firstNum;
-  late int secondNum;
-  late String history;
-  late String textToDisplay;
-  late String res;
-  late String operation;
+   int firstNum=0;
+   int secondNum=0;
+   String history='';
+   String textToDisplay='';
+  String res='';
+  String operation='';
 
-  void btnOnClick(final btnVal) {
+  void btnOnClick (String btnVal) {
     if (btnVal == "Clr") {
       textToDisplay = '';
+
       firstNum = 0;
       secondNum = 0;
       res = '';
@@ -63,10 +64,13 @@ class _CalculatorState extends State<Calculator> {
       else {
         res = int.parse(textToDisplay + btnVal).toString();
       }
-
     }
+      setState(() {
+        textToDisplay=res;
+      });
   }
-
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Simple Calculator"),
@@ -81,7 +85,7 @@ class _CalculatorState extends State<Calculator> {
                 alignment: Alignment(1.0, -1.0),
                 child: Padding(
                   padding: EdgeInsets.only(right: 12.0),
-                  child: const Text("4*&*7",
+                  child:  Text(history,
                       style: TextStyle(
                         fontSize: 20,
                       )),
@@ -89,30 +93,30 @@ class _CalculatorState extends State<Calculator> {
             Container(
               padding: EdgeInsets.all(12.0),
               alignment: Alignment(1.0, -1.0),
-              child: const Text("4*&*7",
+              child: Text(textToDisplay,
                   style: TextStyle(
                     fontSize: 40,
                   )),
             ),
             Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
               CalculateButton(
-                text: 9,
+                text: '9',
                 callback: btnOnClick,
               ),
-              CalculateButton(text: 8, callback: btnOnClick),
-              CalculateButton(text: 7, callback: btnOnClick),
+              CalculateButton(text: '8', callback: btnOnClick),
+              CalculateButton(text: '7', callback: btnOnClick),
               CalculateButton(text: 'x', callback: btnOnClick),
             ]),
             Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-              CalculateButton(text: 6, callback: btnOnClick),
-              CalculateButton(text: 5, callback: btnOnClick),
-              CalculateButton(text: 4, callback: btnOnClick),
+              CalculateButton(text: '6', callback: btnOnClick),
+              CalculateButton(text: '5', callback: btnOnClick),
+              CalculateButton(text: '4', callback: btnOnClick),
               CalculateButton(text: '+', callback: btnOnClick),
             ]),
             Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-              CalculateButton(text: 3, callback: btnOnClick),
-              CalculateButton(text: 2, callback: btnOnClick),
-              CalculateButton(text: 1, callback: btnOnClick),
+              CalculateButton(text: '3', callback: btnOnClick),
+              CalculateButton(text: '2', callback: btnOnClick),
+              CalculateButton(text: '1', callback: btnOnClick),
               CalculateButton(text: '-', callback: btnOnClick),
             ]),
             Row(
@@ -128,5 +132,6 @@ class _CalculatorState extends State<Calculator> {
         ),
       ),
     );
+
   }
-}
+  }

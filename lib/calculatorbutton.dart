@@ -23,6 +23,7 @@ class CalculateButton extends StatelessWidget {
                       fontSize: 29,
                     ),
                     shape: RoundedRectangleBorder(
+
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ) ,
@@ -34,3 +35,4 @@ class CalculateButton extends StatelessWidget {
         );
   }
 }
+
