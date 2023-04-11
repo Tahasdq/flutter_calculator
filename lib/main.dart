@@ -21,23 +21,28 @@ class _CalculatorState extends State<Calculator> {
    int secondNum=0;
    String history='';
    String textToDisplay='';
-  String res='';
-  String operation='';
+   String res='';
+   String operation='';
 
   void btnOnClick (String btnVal) {
-    if (btnVal == "Clr") {
+    if (btnVal == "C") {
       textToDisplay = '';
-
       firstNum = 0;
       secondNum = 0;
       res = '';
-    } else if (btnVal == "+" || btnVal == "-" || btnVal == "X" || btnVal == "/") {
+    } else if (btnVal == "+" || btnVal == "-" || btnVal == "x" || btnVal == "/") {
       firstNum = int.parse(textToDisplay);
       res = '';
       operation = btnVal;
-    } else if (btnVal == "=") {
+    }
+    else if(btnVal=="DEL"){
+     if(textToDisplay==res.toString()){
+      print("Entered DEL");
+      res=(res.substring(0, res.length - 1));
+     }
+    }
+    else if (btnVal == "=") {
       secondNum = int.parse(textToDisplay);
-
       if (operation == "+") {
         res = (firstNum + secondNum).toString();
         history =
@@ -50,7 +55,7 @@ class _CalculatorState extends State<Calculator> {
             firstNum.toString() + operation.toString() + secondNum.toString();
       }
 
-      if (operation == "X") {
+      if (operation == "x") {
         res = (firstNum * secondNum).toString();
         history =
             firstNum.toString() + operation.toString() + secondNum.toString();
@@ -61,11 +66,12 @@ class _CalculatorState extends State<Calculator> {
         history =
             firstNum.toString() + operation.toString() + secondNum.toString();
       }
-      else {
+    }
+    else {
         res = int.parse(textToDisplay + btnVal).toString();
       }
-    }
       setState(() {
+        // print("value of res is  $res");
         textToDisplay=res;
       });
   }
@@ -99,13 +105,10 @@ class _CalculatorState extends State<Calculator> {
                   )),
             ),
             Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-              CalculateButton(
-                text: '9',
-                callback: btnOnClick,
-              ),
+              CalculateButton(text: '9', callback: btnOnClick),
               CalculateButton(text: '8', callback: btnOnClick),
               CalculateButton(text: '7', callback: btnOnClick),
-              CalculateButton(text: 'x', callback: btnOnClick),
+              CalculateButton(text: 'DEL', callback: btnOnClick),
             ]),
             Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
               CalculateButton(text: '6', callback: btnOnClick),
@@ -123,8 +126,8 @@ class _CalculatorState extends State<Calculator> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CalculateButton(text: '=', callback: btnOnClick),
-                CalculateButton(text: "Clr", callback: btnOnClick),
-                CalculateButton(text: "*", callback: btnOnClick),
+                CalculateButton(text: "C", callback: btnOnClick),
+                CalculateButton(text: "x", callback: btnOnClick),
                 CalculateButton(text: '/', callback: btnOnClick),
               ],
             ),
